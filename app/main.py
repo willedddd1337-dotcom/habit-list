@@ -24,6 +24,13 @@ app = FastAPI(
     swagger_ui_parameters={"persistAuthorization": True}
 )
 
+
+@app.get("/")
+def root():
+    return {
+        "message": "Habit Tracker API is running 🚀"
+    }
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
