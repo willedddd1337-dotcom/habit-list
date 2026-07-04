@@ -18,6 +18,7 @@ async def lifespan(_: FastAPI):
     Base.metadata.create_all(bind=engine)
     yield
 
+print("MAIN FILE LOADED")
 
 app = FastAPI(
     lifespan=lifespan,
