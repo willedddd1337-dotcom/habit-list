@@ -34,7 +34,7 @@ def root():
 
 
 origins = [
-    "front-willed.vercel.app",  # Замени на РЕАЛЬНУЮ ссылку твоего фронтенда с Vercel
+    "https://front-willed.vercel.app/",  # Замени на РЕАЛЬНУЮ ссылку твоего фронтенда с Vercel
     "http://localhost",                # На всякий случай для локальных тестов
     "http://localhost:3000",           # (если открываешь код локально)
     "http://127.0.0.1:5500",           # Часто используется для Live Server в VS Code
