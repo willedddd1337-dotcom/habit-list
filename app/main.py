@@ -32,13 +32,23 @@ def root():
         "message": "Habit Tracker API is running 🚀"
     }
 
+
+origins = [
+    "front-willed.vercel.app",  # Замени на РЕАЛЬНУЮ ссылку твоего фронтенда с Vercel
+    "http://localhost",                # На всякий случай для локальных тестов
+    "http://localhost:3000",           # (если открываешь код локально)
+    "http://127.0.0.1:5500",           # Часто используется для Live Server в VS Code
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=origins,            # Разрешаем запросы только с этих адресов
+    allow_credentials=True,
+    allow_methods=["*"],              # Разрешаем все методы (POST, GET, OPTIONS, DELETE и т.д.)
+    allow_headers=["*"],              # Разрешаем любые заголовки (включая Authorization, Content-Type)
 )
 
+# Дальше идет твой остальной код (роуты, логика и т.д.)
 app.include_router(auth_router)
 app.include_router(habit_router)
 
