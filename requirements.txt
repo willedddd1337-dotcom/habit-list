@@ -28,7 +28,6 @@ pillow==12.2.0
 psycopg==3.3.4
 psycopg-binary==3.3.4
 psycopg2-binary==2.9.12
-py2exe-gui==0.3.2
 pyasn1==0.6.3
 pycparser==3.0
 pydantic==2.13.3
