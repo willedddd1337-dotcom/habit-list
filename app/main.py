@@ -55,4 +55,6 @@ app.include_router(habit_router)
 
 if __name__ == "__main__":
     # Исправляем путь для uvicorn под твою структуру проекта
-    uvicorn.run(app="app.main:app", host="0.0.0.0", port=10000, reload=True)
+    uvicorn.run(app="app.main:app", host="0.0.0.0", port=10000, reload=True) 
+
+# 
