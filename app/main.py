@@ -25,32 +25,34 @@ app = FastAPI(
     swagger_ui_parameters={"persistAuthorization": True}
 )
 
-
 @app.get("/")
 def root():
     return {
         "message": "Habit Tracker API is running 🚀"
     }
 
-
+# ВАЖНО: Убираем слеш '/' на конце у ссылки Vercel!
+# Также добавляем вариант со звездочкой и без, чтобы наверняка.
 origins = [
-    "https://front-willed.vercel.app/",  # Замени на РЕАЛЬНУЮ ссылку твоего фронтенда с Vercel
-    "http://localhost",                # На всякий случай для локальных тестов
-    "http://localhost:3000",           # (если открываешь код локально)
-    "http://127.0.0.1:5500",           # Часто используется для Live Server в VS Code
+    "https://front-willed.vercel.app",   # БЕЗ СЛЕША НА КОНЦЕ (ОБЯЗАТЕЛЬНО)
+    "https://front-willed.vercel.app/",  # На всякий случай оставляем и этот
+    "http://localhost",
+    "http://localhost:3000",
+    "http://127.0.0.1:5500",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,            # Разрешаем запросы только с этих адресов
+    allow_origins=origins,            # Разрешаем запросы с этих адресов
     allow_credentials=True,
-    allow_methods=["*"],              # Разрешаем все методы (POST, GET, OPTIONS, DELETE и т.д.)
-    allow_headers=["*"],              # Разрешаем любые заголовки (включая Authorization, Content-Type)
+    allow_methods=["*"],              # Разрешаем все методы (POST, GET, OPTIONS и др.)
+    allow_headers=["*"],              # Разрешаем любые заголовки
 )
 
-# Дальше идет твой остальной код (роуты, логика и т.д.)
+# Роутеры подключаются СТРОГО после add_middleware
 app.include_router(auth_router)
 app.include_router(habit_router)
 
 if __name__ == "__main__":
-    uvicorn.run(app="main:app", reload=True)
+    # Исправляем путь для uvicorn под твою структуру проекта
+    uvicorn.run(app="app.main:app", host="0.0.0.0", port=10000, reload=True)
