@@ -31,11 +31,10 @@ def root():
         "message": "Habit Tracker API is running 🚀"
     }
 
-# ВАЖНО: Убираем слеш '/' на конце у ссылки Vercel!
-# Также добавляем вариант со звездочкой и без, чтобы наверняка.
+
 origins = [
-    "https://front-willed.vercel.app",   # БЕЗ СЛЕША НА КОНЦЕ (ОБЯЗАТЕЛЬНО)
-    "https://front-willed.vercel.app/",  # На всякий случай оставляем и этот
+    "https://front-willed.vercel.app", 
+    "https://front-willed.vercel.app/",
     "http://localhost",
     "http://localhost:3000",
     "http://127.0.0.1:5500",
@@ -43,10 +42,10 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,            # Разрешаем запросы с этих адресов
+    allow_origins=origins,         
     allow_credentials=True,
-    allow_methods=["*"],              # Разрешаем все методы (POST, GET, OPTIONS и др.)
-    allow_headers=["*"],              # Разрешаем любые заголовки
+    allow_methods=["*"],           
+    allow_headers=["*"],             
 )
 
 # Роутеры подключаются СТРОГО после add_middleware
