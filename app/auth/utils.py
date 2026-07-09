@@ -7,12 +7,14 @@ from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.models.user import UserOrm
 from dotenv import load_dotenv 
+from app.core.settings import get_settings
 
 import os 
 
 load_dotenv()
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+settings = get_settings()
+SECRET_KEY = settings.secret_key
 ALGORITHM = "HS256"
 TOKEN_EXPIRE_MINUTES = 60 * 24
 
