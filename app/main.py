@@ -18,8 +18,6 @@ async def lifespan(_: FastAPI):
     Base.metadata.create_all(bind=engine)
     yield
 
-print("MAIN FILE LOADED")
-
 app = FastAPI(
     lifespan=lifespan,
     swagger_ui_parameters={"persistAuthorization": True}
@@ -48,12 +46,10 @@ app.add_middleware(
     allow_headers=["*"],             
 )
 
-# Роутеры подключаются СТРОГО после add_middleware
 app.include_router(auth_router)
 app.include_router(habit_router)
 
 if __name__ == "__main__":
-    # Исправляем путь для uvicorn под твою структуру проекта
     uvicorn.run(app="app.main:app", host="0.0.0.0", port=10000, reload=True) 
 
 # 
