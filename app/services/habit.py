@@ -79,3 +79,17 @@ class HabitService:
                 break
 
         return streak
+    
+    def get_logs_for_month(self, user_id: str, habit_id: str, year: int, month: int) -> list[str]:
+        habit = self.repo.get_by_id(habit_id)
+        if not habit:
+            raise ValueError("Привычка не найдена")
+        if habit.user_id != user_id:
+            raise ValueError("Нет доступа")
+
+        logs = self.log_repo.get_all_by_habit(habit_id)
+        return [
+            str(log.logged_date)
+            for log in logs
+            if log.logged_date.year == year and log.logged_date.month == month
+        ]

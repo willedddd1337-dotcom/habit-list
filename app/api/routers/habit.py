@@ -67,3 +67,17 @@ def get_stats(
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     
+@router.get("/{habit_id}/calendar")
+def get_calendar(
+    habit_id: str,
+    year: int,
+    month: int,
+    db: Session = Depends(get_db),
+    user: UserOrm = Depends(get_current_user)
+):
+    service = HabitService(db)
+    try:
+        dates = service.get_logs_for_month(user_id=user.id, habit_id=habit_id, year=year, month=month)
+        return {"dates": dates}
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
